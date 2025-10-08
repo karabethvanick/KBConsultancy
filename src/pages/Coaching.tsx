@@ -7,8 +7,16 @@ interface CoachingProps {
 export default function Coaching({ onNavigate }: CoachingProps) {
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-16 bg-gradient-to-br from-blue-50 to-cyan-50">
-        <div className="container mx-auto px-4">
+      <section className="relative py-24 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 grid grid-cols-5 gap-2 opacity-20">
+          <div className="bg-cover bg-center" style={{ backgroundImage: 'url(/coaching/IMG_2256.jpg)' }}></div>
+          <div className="bg-cover bg-center" style={{ backgroundImage: 'url(/coaching/IMG_1265.JPG)' }}></div>
+          <div className="bg-cover bg-center" style={{ backgroundImage: 'url(/coaching/IMG_6946.jpg)' }}></div>
+          <div className="bg-cover bg-center" style={{ backgroundImage: 'url(/coaching/IMG_5015.jpg)' }}></div>
+          <div className="bg-cover bg-center" style={{ backgroundImage: 'url(/coaching/IMG_0433.jpg)' }}></div>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/95 via-cyan-50/95 to-blue-100/95"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Coaching Services</h1>
           <p className="text-xl text-slate-600 max-w-3xl">
             Personalized training programs to help you reach your fitness and endurance goals.
