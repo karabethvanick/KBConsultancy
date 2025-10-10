@@ -25,12 +25,12 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
   };
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex items-center justify-between py-4">
           <button
             onClick={() => handleNavClick('home')}
-            className="text-xl md:text-2xl font-semibold text-emerald-700 hover:text-emerald-600 transition-colors"
+            className="text-2xl font-semibold text-emerald-700 hover:text-emerald-600 transition-colors"
           >
             Karabeth Vanick
           </button>
@@ -43,43 +43,52 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
 
-          <div className="hidden md:flex space-x-6">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleNavClick(item.id)}
-                className={`transition-colors ${
-                  currentPage === item.id
-                    ? 'text-emerald-600 font-semibold'
-                    : 'text-slate-700 hover:text-emerald-600'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {isOpen && (
-          <div className="md:hidden pb-4">
-            <div className="flex flex-col space-y-3">
-              {navItems.map((item) => (
+          <div className="hidden md:flex items-center space-x-6">
+            {navItems.map((item) => {
+              const active = currentPage === item.id;
+              return (
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`text-left py-2 px-4 rounded transition-colors ${
-                    currentPage === item.id
-                      ? 'bg-emerald-50 text-emerald-600 font-semibold'
-                      : 'text-slate-700 hover:bg-slate-50'
+                  className={`pb-1 border-b-2 transition-colors ${
+                    active
+                      ? 'border-emerald-500 text-emerald-700'
+                      : 'border-transparent text-slate-600 hover:border-emerald-400 hover:text-emerald-700'
                   }`}
                 >
                   {item.label}
                 </button>
-              ))}
+              );
+            })}
+          </div>
+        </div>
+
+        {isOpen && (
+          <div className="md:hidden pb-4 animate-slideDown origin-top">
+            <div className="flex flex-col rounded-xl border border-slate-200 bg-white/95 shadow-sm overflow-hidden">
+              {navItems.map((item) => {
+                const active = currentPage === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNavClick(item.id)}
+                    className={`text-left py-3 px-4 transition-colors ${
+                      active
+                        ? 'bg-emerald-50 text-emerald-700 font-semibold'
+                        : 'text-slate-700 hover:bg-slate-50'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                );
+              })}
             </div>
           </div>
         )}
       </div>
+
+      {/* thin accent bar */}
+      <div className="h-1 w-full bg-gradient-to-r from-emerald-600 to-emerald-400" />
     </nav>
   );
 }
