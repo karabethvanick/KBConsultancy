@@ -30,7 +30,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
         <div className="flex items-center justify-between py-4">
           <button
             onClick={() => handleNavClick('home')}
-            className="text-2xl font-semibold text-emerald-700 hover:text-emerald-600 transition-colors"
+            className="text-2xl font-semibold text-violet-700 hover:text-violet-600 transition-colors"
           >
             Karabeth Vanick
           </button>
@@ -52,9 +52,9 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                   onClick={() => handleNavClick(item.id)}
                   className={`pb-1 border-b-2 transition-colors ${
                     active
-                      ? 'border-emerald-500 text-emerald-700'
-                      : 'border-transparent text-slate-600 hover:border-emerald-400 hover:text-emerald-700'
-                  }`}
+                      ? 'border-violet-500 text-violet-700'
+                      : 'border-transparent text-slate-600 hover:border-violet-400 hover:text-violet-700'
+                  } focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/50 rounded-sm`}
                 >
                   {item.label}
                 </button>
@@ -74,9 +74,9 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                     onClick={() => handleNavClick(item.id)}
                     className={`text-left py-3 px-4 transition-colors ${
                       active
-                        ? 'bg-emerald-50 text-emerald-700 font-semibold'
+                        ? 'bg-violet-50 text-violet-700 font-semibold'
                         : 'text-slate-700 hover:bg-slate-50'
-                    }`}
+                    } focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/50`}
                   >
                     {item.label}
                   </button>
@@ -88,7 +88,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
       </div>
 
       {/* thin accent bar */}
-      <div className="h-1 w-full bg-gradient-to-r from-emerald-600 to-emerald-400" />
+      <div className="h-1 w-full bg-gradient-to-r from-violet-700 via-purple-600 to-indigo-500" />
     </nav>
   );
 }

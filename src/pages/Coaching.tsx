@@ -15,10 +15,10 @@ export default function Coaching({ onNavigate }: CoachingProps) {
           <div className="bg-cover bg-center" style={{ backgroundImage: 'url(/coaching/IMG_5015.jpg)' }}></div>
           <div className="bg-cover bg-center" style={{ backgroundImage: 'url(/coaching/IMG_0433.jpg)' }}></div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/95 via-cyan-50/95 to-blue-100/95"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-violet-900/95 via-purple-800/95 to-indigo-900/95"></div>
         <div className="container mx-auto px-4 relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Coaching Services</h1>
-          <p className="text-xl text-slate-600 max-w-3xl">
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 text-white mb-4">Coaching Services</h1>
+          <p className="text-xl text-slate-600 text-white max-w-3xl">
             Personalized training programs to help you reach your fitness and endurance goals.
           </p>
         </div>
@@ -28,7 +28,7 @@ export default function Coaching({ onNavigate }: CoachingProps) {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto mb-12">
             <p className="text-lg text-slate-700 leading-relaxed">
-              Whether you're training for your first 5K or preparing for an ultra-endurance event, I
+              Whether you're training for your first 5K or preparing for an endurance event, I
               provide expert coaching that considers not just your physical training, but your mental
               preparation and overall well-being. My integrated approach sets you up for sustainable
               success.
@@ -42,7 +42,7 @@ export default function Coaching({ onNavigate }: CoachingProps) {
               </div>
               <h3 className="text-2xl font-semibold text-slate-800 mb-3">Endurance Athlete Coaching</h3>
               <p className="text-slate-600 leading-relaxed mb-4">
-                Comprehensive training plans for runners, cyclists, triathletes, and ultra-endurance
+                Comprehensive training plans for runners, cyclists, swimmers,triathletes, and endurance
                 athletes. Programs include:
               </p>
               <ul className="space-y-2 text-slate-600">
@@ -65,6 +65,10 @@ export default function Coaching({ onNavigate }: CoachingProps) {
                 <li className="flex items-start">
                   <span className="text-blue-600 mr-2">•</span>
                   <span>Race day preparation and strategy</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">•</span>
+                  <span>Intuitive Eating Coach</span>
                 </li>
               </ul>
             </div>
@@ -105,33 +109,22 @@ export default function Coaching({ onNavigate }: CoachingProps) {
               <div className="flex items-center justify-center w-14 h-14 bg-cyan-100 rounded-full mb-4">
                 <Users2 className="text-cyan-600" size={28} />
               </div>
-              <h3 className="text-2xl font-semibold text-slate-800 mb-3">Youth Fitness Programs</h3>
-              <p className="text-slate-600 leading-relaxed mb-4">
-                Age-appropriate fitness training for children and teens that promotes lifelong healthy
-                habits. Programs feature:
-              </p>
-              <ul className="space-y-2 text-slate-600">
-                <li className="flex items-start">
-                  <span className="text-cyan-600 mr-2">•</span>
-                  <span>Fun, engaging movement activities</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-600 mr-2">•</span>
-                  <span>Sport-specific skill development</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-600 mr-2">•</span>
-                  <span>Body confidence and positive self-image focus</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-600 mr-2">•</span>
-                  <span>Team building and social skills</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-600 mr-2">•</span>
-                  <span>Safe, developmentally appropriate exercises</span>
-                </li>
-              </ul>
+              <h3 className="text-2xl font-semibold text-slate-800 mb-3">Inclusive Fitness & Wellness Programs</h3>
+<p className="text-slate-600 leading-relaxed">
+  Designed for individuals of all ages and abilities, our fitness and wellness programs promote 
+  lifelong healthy habits through movement, strength, and connection. Each session encourages 
+  participants to discover joy in physical activity while improving mobility, confidence, and 
+  overall well-being. We focus on fun, adaptable exercises, sport-specific skill development, 
+  and mindful body awareness—creating a supportive environment where everyone can thrive at 
+  their own pace.
+</p>
+<ul className="list-disc pl-6 text-slate-600 leading-relaxed mt-2">
+  <li>Fun and engaging movement activities for all ability levels</li>
+  <li>Personalized skill development and progress tracking</li>
+  <li>Body confidence and positive self-image building</li>
+  <li>Inclusive team-based and social interaction exercises</li>
+  <li>Safe, adaptive, and developmentally appropriate training</li>
+</ul>
             </div>
 
             <div className="bg-white border-2 border-slate-100 rounded-xl p-8 hover:shadow-lg transition-shadow">
@@ -140,9 +133,11 @@ export default function Coaching({ onNavigate }: CoachingProps) {
               </div>
               <h3 className="text-2xl font-semibold text-slate-800 mb-3">The Mind-Body Connection</h3>
               <p className="text-slate-600 leading-relaxed">
-                What sets my coaching apart is the integration of mental health principles. As both a
-                therapist and trainer, I help you overcome mental barriers, build resilience, manage
-                performance anxiety, and develop the psychological tools needed for long-term success.
+              What sets my coaching apart is the seamless integration of therapeutic insight with physical training. 
+  By addressing both the body and the mind, I help individuals move beyond mental barriers, build emotional 
+  resilience, and cultivate inner strength. Together, we explore how mindset, stress, and emotions influence 
+  performance and overall well-being—developing personalized tools to manage anxiety, sustain motivation, 
+  and achieve long-term balance in health, fitness, and life.
               </p>
             </div>
           </div>

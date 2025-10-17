@@ -8,15 +8,17 @@ interface TherapyProps {
 export default function Therapy({ onNavigate }: TherapyProps) {
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-16 bg-gradient-to-br from-emerald-50 to-teal-50">
+      {/* Hero */}
+      <section className="relative h-[70vh] min-h-[500px] bg-gradient-to-br from-violet-700 via-purple-600 to-indigo-700 flex items-center">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Therapy Services</h1>
-          <p className="text-xl text-slate-600 max-w-3xl">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Therapy Services</h1>
+          <p className="text-xl text-slate-100 max-w-3xl">
             Compassionate, evidence-based therapy tailored to your unique needs and goals.
           </p>
         </div>
       </section>
 
+      {/* Intro */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto mb-12">
@@ -27,10 +29,12 @@ export default function Therapy({ onNavigate }: TherapyProps) {
             </p>
           </div>
 
+          {/* Services grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            <div className="bg-white border-2 border-emerald-100 rounded-xl p-8 hover:shadow-lg transition-shadow">
-              <div className="flex items-center justify-center w-14 h-14 bg-emerald-100 rounded-full mb-4">
-                <Footprints className="text-emerald-600" size={28} />
+            {/* Walk-and-Talk */}
+            <div className="bg-white border-2 border-violet-100 rounded-xl p-8 hover:shadow-lg transition-shadow">
+              <div className="flex items-center justify-center w-14 h-14 bg-violet-100 rounded-full mb-4">
+                <Footprints className="text-violet-600" size={28} />
               </div>
               <h3 className="text-2xl font-semibold text-slate-800 mb-3">Walk-and-Talk Therapy</h3>
               <p className="text-slate-600 leading-relaxed">
@@ -40,9 +44,10 @@ export default function Therapy({ onNavigate }: TherapyProps) {
               </p>
             </div>
 
-            <div className="bg-white border-2 border-blue-100 rounded-xl p-8 hover:shadow-lg transition-shadow">
-              <div className="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full mb-4">
-                <Sparkles className="text-blue-600" size={28} />
+            {/* Mindfulness */}
+            <div className="bg-white border-2 border-purple-100 rounded-xl p-8 hover:shadow-lg transition-shadow">
+              <div className="flex items-center justify-center w-14 h-14 bg-purple-100 rounded-full mb-4">
+                <Sparkles className="text-purple-600" size={28} />
               </div>
               <h3 className="text-2xl font-semibold text-slate-800 mb-3">Mindfulness-Based Therapy</h3>
               <p className="text-slate-600 leading-relaxed">
@@ -52,21 +57,25 @@ export default function Therapy({ onNavigate }: TherapyProps) {
               </p>
             </div>
 
+            {/* Art, Play & Water */}
             <div className="bg-white border-2 border-purple-100 rounded-xl p-8 hover:shadow-lg transition-shadow">
               <div className="flex items-center justify-center w-14 h-14 bg-purple-100 rounded-full mb-4">
                 <Palette className="text-purple-600" size={28} />
               </div>
-              <h3 className="text-2xl font-semibold text-slate-800 mb-3">Art & Play Therapy</h3>
+              <h3 className="text-2xl font-semibold text-slate-800 mb-3">Art, Play & Water Therapy</h3>
               <p className="text-slate-600 leading-relaxed">
-                Creative expression can unlock healing in ways that words alone cannot. Through art
-                and play-based interventions, particularly effective with youth, we explore emotions,
-                process experiences, and build coping skills in engaging ways.
+                Art, Play, and Water Therapy blend creative and sensory experiences to support emotional healing and 
+                psychological growth. Through expressive art, imaginative play, and the calming flow of water-based 
+                activities, individuals can process emotions, release tension, and rebuild a sense of safety and control. 
+                These therapeutic approaches are especially effective for children and trauma survivors, encouraging 
+                nonverbal communication, self-awareness, and emotional regulation within a nurturing and supportive environment.
               </p>
             </div>
 
-            <div className="bg-white border-2 border-teal-100 rounded-xl p-8 hover:shadow-lg transition-shadow">
-              <div className="flex items-center justify-center w-14 h-14 bg-teal-100 rounded-full mb-4">
-                <Users className="text-teal-600" size={28} />
+            {/* Youth-Focused Care */}
+            <div className="bg-white border-2 border-indigo-100 rounded-xl p-8 hover:shadow-lg transition-shadow">
+              <div className="flex items-center justify-center w-14 h-14 bg-indigo-100 rounded-full mb-4">
+                <Users className="text-indigo-600" size={28} />
               </div>
               <h3 className="text-2xl font-semibold text-slate-800 mb-3">Youth-Focused Care</h3>
               <p className="text-slate-600 leading-relaxed">
@@ -79,12 +88,10 @@ export default function Therapy({ onNavigate }: TherapyProps) {
         </div>
       </section>
 
+      {/* Evening Sessions banner */}
       <section className="py-16 bg-slate-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-
-
-
             <motion.div
               className="relative overflow-hidden rounded-xl p-8 text-white shadow-2xl"
               initial={{ opacity: 0, y: 40 }}
@@ -92,17 +99,11 @@ export default function Therapy({ onNavigate }: TherapyProps) {
               transition={{ duration: 0.8, ease: 'easeOut' }}
               viewport={{ once: true }}
             >
-              {/* Animated gradient background */}
+              {/* Animated gradient background (shifted to purple family) */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-sky-900 to-blue-900"
-                animate={{
-                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-                }}
-                transition={{
-                  duration: 20,
-                  ease: 'linear',
-                  repeat: Infinity,
-                }}
+                className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-violet-900 to-purple-900"
+                animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+                transition={{ duration: 20, ease: 'linear', repeat: Infinity }}
                 style={{ backgroundSize: '200% 200%' }}
               />
 
@@ -115,10 +116,7 @@ export default function Therapy({ onNavigate }: TherapyProps) {
                     top: `${Math.random() * 100}%`,
                     left: `${Math.random() * 100}%`,
                   }}
-                  animate={{
-                    opacity: [0.2, 1, 0.2],
-                    scale: [0.8, 1.3, 0.8],
-                  }}
+                  animate={{ opacity: [0.2, 1, 0.2], scale: [0.8, 1.3, 0.8] }}
                   transition={{
                     duration: 2 + Math.random() * 3,
                     repeat: Infinity,
@@ -132,31 +130,28 @@ export default function Therapy({ onNavigate }: TherapyProps) {
               <div className="relative flex flex-col md:flex-row items-center gap-6 z-10">
                 <motion.div
                   className="flex-shrink-0"
-                  animate={{
-                    y: [0, -5, 0],
-                    scale: [1, 1.05, 1],
-                  }}
+                  animate={{ y: [0, -5, 0], scale: [1, 1.05, 1] }}
                   transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
                 >
                   <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400/30 to-yellow-200/20 backdrop-blur-sm">
-                    <Moon className="text-yellow-300 drop-shadow-glow" size={32} />
+                    <Moon className="text-yellow-300" size={32} />
                   </div>
                 </motion.div>
 
                 <div className="flex-grow text-center md:text-left">
-                  <h3 className="text-2xl font-semibold mb-2 text-sky-100">Evening Sessions Available</h3>
-                  <p className="text-sky-100 leading-relaxed">
+                  <h3 className="text-2xl font-semibold mb-2 text-violet-100">Evening Sessions Available</h3>
+                  <p className="text-violet-100 leading-relaxed">
                     I offer late-night therapy sessions to accommodate busy schedules. Because mental health
                     care should be accessible when you need it most.
                   </p>
                 </div>
               </div>
             </motion.div>
-
           </div>
         </div>
       </section>
 
+      {/* CTA */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
@@ -167,7 +162,7 @@ export default function Therapy({ onNavigate }: TherapyProps) {
             </p>
             <button
               onClick={() => onNavigate('contact')}
-              className="px-8 py-4 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700 transition-colors shadow-lg"
+              className="px-8 py-4 bg-gradient-to-r from-violet-500 to-purple-500 text-white rounded-lg font-semibold hover:from-violet-400 hover:to-purple-400 transition-all duration-300 shadow-md hover:shadow-lg"
             >
               Schedule a Consultation
             </button>

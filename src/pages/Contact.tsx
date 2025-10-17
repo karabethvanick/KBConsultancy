@@ -49,18 +49,21 @@ export default function Contact({ onNavigate }: ContactProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
+      {/* Header Section */}
+      <section className="py-16 bg-gradient-to-br from-violet-700 via-purple-600 to-indigo-700">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Get in Touch</h1>
-          <p className="text-xl text-slate-600 max-w-3xl">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Get in Touch</h1>
+          <p className="text-xl text-slate-100 max-w-3xl">
             Ready to start your journey? Reach out to schedule a consultation or ask any questions.
           </p>
         </div>
       </section>
 
+      {/* Contact Content */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            {/* Contact Info */}
             <div>
               <h2 className="text-3xl font-bold text-slate-800 mb-6">Contact Information</h2>
               <p className="text-slate-600 mb-8">
@@ -69,24 +72,26 @@ export default function Contact({ onNavigate }: ContactProps) {
               </p>
 
               <div className="space-y-6">
+                {/* Email */}
                 <div className="flex items-start">
-                  <div className="flex-shrink-0 w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mr-4">
-                    <Mail className="text-emerald-600" size={24} />
+                  <div className="flex-shrink-0 w-12 h-12 bg-violet-100 rounded-lg flex items-center justify-center mr-4">
+                    <Mail className="text-violet-600" size={24} />
                   </div>
                   <div>
                     <h3 className="font-semibold text-slate-800 mb-1">Email</h3>
                     <a
                       href="mailto:karabeth@karabethvanick.com"
-                      className="text-emerald-600 hover:text-emerald-700"
+                      className="text-violet-600 hover:text-violet-700"
                     >
                       karabeth@karabethvanick.com
                     </a>
                   </div>
                 </div>
 
+                {/* Phone */}
                 <div className="flex items-start">
-                  <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                    <Phone className="text-blue-600" size={24} />
+                  <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                    <Phone className="text-purple-600" size={24} />
                   </div>
                   <div>
                     <h3 className="font-semibold text-slate-800 mb-1">Phone</h3>
@@ -94,9 +99,10 @@ export default function Contact({ onNavigate }: ContactProps) {
                   </div>
                 </div>
 
+                {/* Location */}
                 <div className="flex items-start">
-                  <div className="flex-shrink-0 w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center mr-4">
-                    <MapPin className="text-slate-600" size={24} />
+                  <div className="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mr-4">
+                    <MapPin className="text-indigo-600" size={24} />
                   </div>
                   <div>
                     <h3 className="font-semibold text-slate-800 mb-1">Location</h3>
@@ -105,25 +111,26 @@ export default function Contact({ onNavigate }: ContactProps) {
                 </div>
               </div>
 
-              <div className="mt-8 p-6 bg-emerald-50 rounded-lg">
+              <div className="mt-8 p-6 bg-violet-50 rounded-lg">
                 <h3 className="font-semibold text-slate-800 mb-2">Response Time</h3>
                 <p className="text-slate-600 text-sm">
-                  I typically respond to inquiries within 24-48 hours. If you need immediate support,
+                  I typically respond to inquiries within 24–48 hours. If you need immediate support,
                   please contact your local crisis hotline.
                 </p>
               </div>
             </div>
 
+            {/* Contact Form */}
             <div>
               <div className="bg-white border-2 border-slate-100 rounded-xl p-8 shadow-lg">
                 <h2 className="text-2xl font-bold text-slate-800 mb-6">Send a Message</h2>
 
                 {submitted && (
-                  <div className="mb-6 p-4 bg-emerald-50 border-2 border-emerald-200 rounded-lg flex items-start">
-                    <CheckCircle className="text-emerald-600 mr-3 flex-shrink-0 mt-0.5" size={20} />
+                  <div className="mb-6 p-4 bg-violet-50 border-2 border-violet-200 rounded-lg flex items-start">
+                    <CheckCircle className="text-violet-600 mr-3 flex-shrink-0 mt-0.5" size={20} />
                     <div>
-                      <p className="font-semibold text-emerald-800">Message sent successfully!</p>
-                      <p className="text-sm text-emerald-700 mt-1">
+                      <p className="font-semibold text-violet-800">Message sent successfully!</p>
+                      <p className="text-sm text-violet-700 mt-1">
                         Thank you for reaching out. I'll get back to you soon.
                       </p>
                     </div>
@@ -137,6 +144,7 @@ export default function Contact({ onNavigate }: ContactProps) {
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Name */}
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-2">
                       Name
@@ -148,11 +156,12 @@ export default function Contact({ onNavigate }: ContactProps) {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-emerald-500 transition-colors"
+                      className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-violet-500 transition-colors"
                       placeholder="Your name"
                     />
                   </div>
 
+                  {/* Email */}
                   <div>
                     <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-2">
                       Email
@@ -164,11 +173,12 @@ export default function Contact({ onNavigate }: ContactProps) {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-emerald-500 transition-colors"
+                      className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-violet-500 transition-colors"
                       placeholder="your.email@example.com"
                     />
                   </div>
 
+                  {/* Message */}
                   <div>
                     <label htmlFor="message" className="block text-sm font-semibold text-slate-700 mb-2">
                       Message
@@ -180,15 +190,16 @@ export default function Contact({ onNavigate }: ContactProps) {
                       onChange={handleChange}
                       required
                       rows={6}
-                      className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-emerald-500 transition-colors resize-none"
+                      className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-violet-500 transition-colors resize-none"
                       placeholder="Tell me how I can help you..."
                     />
                   </div>
 
+                  {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full px-6 py-4 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700 transition-colors disabled:bg-slate-400 disabled:cursor-not-allowed flex items-center justify-center"
+                    className="w-full px-6 py-4 bg-gradient-to-r from-violet-500 to-purple-500 text-white rounded-lg font-semibold hover:from-violet-400 hover:to-purple-400 transition-all duration-300 disabled:bg-slate-400 disabled:cursor-not-allowed flex items-center justify-center shadow-md hover:shadow-lg"
                   >
                     {loading ? (
                       <div className="inline-block animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent" />
@@ -205,7 +216,7 @@ export default function Contact({ onNavigate }: ContactProps) {
                     <button
                       type="button"
                       onClick={() => onNavigate('privacy')}
-                      className="text-emerald-600 hover:text-emerald-700 underline"
+                      className="text-violet-600 hover:text-violet-700 underline"
                     >
                       Privacy Policy
                     </button>

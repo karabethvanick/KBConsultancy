@@ -29,12 +29,12 @@ export default function Testimonials() {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-16 bg-gradient-to-br from-emerald-50 to-teal-50">
+      <section className="py-16 bg-gradient-to-br from-violet-900 via-purple-800 to-indigo-900">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Client Testimonials
           </h1>
-          <p className="text-xl text-slate-600 max-w-3xl">
+          <p className="text-xl text-slate-200 max-w-3xl">
             Hear from individuals who have experienced growth and transformation through therapy and coaching.
           </p>
         </div>
@@ -44,7 +44,7 @@ export default function Testimonials() {
         <div className="container mx-auto px-4">
           {loading ? (
             <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-emerald-600 border-t-transparent"></div>
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-violet-600 border-t-transparent"></div>
               <p className="mt-4 text-slate-600">Loading testimonials...</p>
             </div>
           ) : testimonials.length === 0 ? (
@@ -62,14 +62,14 @@ export default function Testimonials() {
               {testimonials.map((testimonial) => (
                 <div
                   key={testimonial.id}
-                  className="bg-gradient-to-br from-white to-emerald-50 border-2 border-emerald-100 rounded-xl p-8 hover:shadow-lg transition-shadow"
+                  className="bg-gradient-to-br from-white to-violet-50 border-2 border-violet-100 rounded-xl p-8 hover:shadow-lg transition-shadow"
                 >
-                  <Quote className="text-emerald-600 mb-4" size={32} />
+                  <Quote className="text-violet-600 mb-4" size={32} />
                   <p className="text-slate-700 leading-relaxed mb-6 italic">
                     "{testimonial.text}"
                   </p>
                   <div className="flex items-center">
-                    <div className="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center text-white font-semibold mr-3">
+                    <div className="w-10 h-10 bg-violet-600 rounded-full flex items-center justify-center text-white font-semibold mr-3">
                       {testimonial.name_or_initials.charAt(0)}
                     </div>
                     <p className="font-semibold text-slate-800">

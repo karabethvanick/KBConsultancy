@@ -47,12 +47,12 @@ export default function Events() {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-16 bg-gradient-to-br from-emerald-50 to-blue-50">
+     <section className="relative h-[20vh] min-h-[300px] bg-gradient-to-br from-violet-900 via-purple-800 to-indigo-900 flex items-center">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-white text-slate-800 mb-4">
             Events & Workshops
           </h1>
-          <p className="text-xl text-slate-600 max-w-3xl">
+          <p className="text-xl text-slate-600 text-white max-w-3xl">
             Join me for upcoming workshops, group sessions, and community events focused on wellness,
             fitness, and personal growth.
           </p>
