@@ -8,27 +8,27 @@ export default function Home({ onNavigate }: HomeProps) {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[70vh] min-h-[500px] bg-gradient-to-br from-violet-700 via-purple-600 to-indigo-700 flex items-center">
+      <section className="relative h-[70vh] min-h-[500px] bg-gradient-to-br from-indigo-300 via-violet-500 to-purple-300 flex items-center">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-sm">
               Mind. Body. Resilience.
             </h1>
-            <p className="text-xl md:text-2xl text-slate-100 mb-8">
+            <p className="text-xl md:text-2xl text-white/90 font-semibold mb-8">
               Integrative therapy and endurance coaching to help you thrive in all aspects of life.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => onNavigate('therapy')}
-                className="px-8 py-4 bg-gradient-to-r from-violet-500 to-purple-500 text-white rounded-xl font-semibold shadow-lg hover:from-violet-400 hover:to-purple-400 transition-all duration-300 transform hover:-translate-y-1"
+                className="px-8 py-4 bg-gradient-to-r from-violet-400 via-purple-400 to-indigo-400 text-white rounded-xl font-semibold shadow-lg hover:from-violet-300 hover:via-purple-300 hover:to-indigo-300 transition-all duration-300 transform hover:-translate-y-1"
               >
                 Therapy Services
               </button>
 
               <button
                 onClick={() => onNavigate('coaching')}
-                className="px-8 py-4 bg-gradient-to-r from-indigo-500 to-violet-500 text-white rounded-xl font-semibold shadow-lg hover:from-indigo-400 hover:to-violet-400 transition-all duration-300 transform hover:-translate-y-1"
+                className="px-8 py-4 bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 text-white rounded-xl font-semibold shadow-lg hover:from-indigo-300 hover:via-violet-300 hover:to-purple-300 transition-all duration-300 transform hover:-translate-y-1"
               >
                 Coaching Services
               </button>
@@ -38,13 +38,13 @@ export default function Home({ onNavigate }: HomeProps) {
       </section>
 
       {/* Highlights Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gradient-to-br from-white via-violet-50 to-indigo-100">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Mental Wellness */}
-            <div className="text-center p-6">
+            <div className="text-center p-6 bg-white/70 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-md transition">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-violet-100 rounded-full mb-4">
-                <Brain className="text-violet-600" size={32} />
+                <Brain className="text-violet-500" size={32} />
               </div>
               <h3 className="text-xl font-semibold text-slate-800 mb-2">
                 Mental Wellness
@@ -55,9 +55,9 @@ export default function Home({ onNavigate }: HomeProps) {
             </div>
 
             {/* Physical Health */}
-            <div className="text-center p-6">
+            <div className="text-center p-6 bg-white/70 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-md transition">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4">
-                <Heart className="text-purple-600" size={32} />
+                <Heart className="text-purple-500" size={32} />
               </div>
               <h3 className="text-xl font-semibold text-slate-800 mb-2">
                 Physical Health
@@ -68,9 +68,9 @@ export default function Home({ onNavigate }: HomeProps) {
             </div>
 
             {/* Endurance Coaching */}
-            <div className="text-center p-6">
+            <div className="text-center p-6 bg-white/70 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-md transition">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-full mb-4">
-                <Mountain className="text-indigo-600" size={32} />
+                <Mountain className="text-indigo-500" size={32} />
               </div>
               <h3 className="text-xl font-semibold text-slate-800 mb-2">
                 Endurance Coaching
@@ -84,7 +84,7 @@ export default function Home({ onNavigate }: HomeProps) {
       </section>
 
       {/* Holistic Approach Section */}
-      <section className="py-16 bg-violet-50">
+      <section className="py-16 bg-gradient-to-r from-violet-100 via-indigo-100 to-purple-100">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-slate-800 mb-4">
             A Holistic Approach to Well-Being
@@ -96,7 +96,7 @@ export default function Home({ onNavigate }: HomeProps) {
           </p>
           <button
             onClick={() => onNavigate('about')}
-            className="px-8 py-3 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-lg font-semibold hover:from-violet-500 hover:to-purple-500 transition-all duration-300 shadow-md hover:shadow-lg"
+            className="px-8 py-3 bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 text-white rounded-lg font-semibold hover:from-indigo-300 hover:via-violet-300 hover:to-purple-300 transition-all duration-300 shadow-md hover:shadow-lg"
           >
             Learn More About My Approach
           </button>

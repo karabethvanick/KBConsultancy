@@ -22,15 +22,11 @@ export default function Contact({ onNavigate }: ContactProps) {
     setError('');
 
     try {
-      const { error: submitError } = await supabase
-        .from('contacts')
-        .insert([formData]);
-
+      const { error: submitError } = await supabase.from('contacts').insert([formData]);
       if (submitError) throw submitError;
 
       setSubmitted(true);
       setFormData({ name: '', email: '', message: '' });
-
       setTimeout(() => setSubmitted(false), 5000);
     } catch (err) {
       console.error('Error submitting form:', err);
@@ -41,26 +37,23 @@ export default function Contact({ onNavigate }: ContactProps) {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   return (
     <div className="min-h-screen bg-white">
       {/* Header Section */}
-      <section className="py-16 bg-gradient-to-br from-violet-700 via-purple-600 to-indigo-700">
+      <section className="py-16 bg-gradient-to-br from-indigo-300 via-violet-500 to-purple-300">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Get in Touch</h1>
-          <p className="text-xl text-slate-100 max-w-3xl">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-sm">Get in Touch</h1>
+          <p className="text-xl text-white/90 font-semibold max-w-3xl">
             Ready to start your journey? Reach out to schedule a consultation or ask any questions.
           </p>
         </div>
       </section>
 
       {/* Contact Content */}
-      <section className="py-16">
+      <section className="py-16 bg-gradient-to-br from-white via-violet-50 to-indigo-100">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Contact Info */}
@@ -73,23 +66,20 @@ export default function Contact({ onNavigate }: ContactProps) {
 
               <div className="space-y-6">
                 {/* Email */}
-                <div className="flex items-start">
+                <div className="flex items-start bg-white/70 backdrop-blur-sm rounded-lg p-4 shadow-sm">
                   <div className="flex-shrink-0 w-12 h-12 bg-violet-100 rounded-lg flex items-center justify-center mr-4">
                     <Mail className="text-violet-600" size={24} />
                   </div>
                   <div>
                     <h3 className="font-semibold text-slate-800 mb-1">Email</h3>
-                    <a
-                      href="mailto:karabeth@karabethvanick.com"
-                      className="text-violet-600 hover:text-violet-700"
-                    >
+                    <a href="mailto:karabeth@karabethvanick.com" className="text-violet-600 hover:text-violet-700">
                       karabeth@karabethvanick.com
                     </a>
                   </div>
                 </div>
 
                 {/* Phone */}
-                <div className="flex items-start">
+                <div className="flex items-start bg-white/70 backdrop-blur-sm rounded-lg p-4 shadow-sm">
                   <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
                     <Phone className="text-purple-600" size={24} />
                   </div>
@@ -100,7 +90,7 @@ export default function Contact({ onNavigate }: ContactProps) {
                 </div>
 
                 {/* Location */}
-                <div className="flex items-start">
+                <div className="flex items-start bg-white/70 backdrop-blur-sm rounded-lg p-4 shadow-sm">
                   <div className="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mr-4">
                     <MapPin className="text-indigo-600" size={24} />
                   </div>
@@ -111,7 +101,7 @@ export default function Contact({ onNavigate }: ContactProps) {
                 </div>
               </div>
 
-              <div className="mt-8 p-6 bg-violet-50 rounded-lg">
+              <div className="mt-8 p-6 bg-white/70 backdrop-blur-sm rounded-lg shadow-sm">
                 <h3 className="font-semibold text-slate-800 mb-2">Response Time</h3>
                 <p className="text-slate-600 text-sm">
                   I typically respond to inquiries within 24–48 hours. If you need immediate support,
@@ -122,23 +112,21 @@ export default function Contact({ onNavigate }: ContactProps) {
 
             {/* Contact Form */}
             <div>
-              <div className="bg-white border-2 border-slate-100 rounded-xl p-8 shadow-lg">
+              <div className="bg-white/70 backdrop-blur-sm rounded-xl p-8 shadow-sm">
                 <h2 className="text-2xl font-bold text-slate-800 mb-6">Send a Message</h2>
 
                 {submitted && (
-                  <div className="mb-6 p-4 bg-violet-50 border-2 border-violet-200 rounded-lg flex items-start">
+                  <div className="mb-6 p-4 bg-violet-50 border border-violet-200 rounded-lg flex items-start">
                     <CheckCircle className="text-violet-600 mr-3 flex-shrink-0 mt-0.5" size={20} />
                     <div>
                       <p className="font-semibold text-violet-800">Message sent successfully!</p>
-                      <p className="text-sm text-violet-700 mt-1">
-                        Thank you for reaching out. I'll get back to you soon.
-                      </p>
+                      <p className="text-sm text-violet-700 mt-1">Thank you for reaching out. I'll get back to you soon.</p>
                     </div>
                   </div>
                 )}
 
                 {error && (
-                  <div className="mb-6 p-4 bg-red-50 border-2 border-red-200 rounded-lg">
+                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
                     <p className="text-sm text-red-700">{error}</p>
                   </div>
                 )}
@@ -199,7 +187,7 @@ export default function Contact({ onNavigate }: ContactProps) {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full px-6 py-4 bg-gradient-to-r from-violet-500 to-purple-500 text-white rounded-lg font-semibold hover:from-violet-400 hover:to-purple-400 transition-all duration-300 disabled:bg-slate-400 disabled:cursor-not-allowed flex items-center justify-center shadow-md hover:shadow-lg"
+                    className="w-full px-6 py-4 bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 text-white rounded-lg font-semibold hover:from-indigo-300 hover:via-violet-300 hover:to-purple-300 transition-all duration-300 disabled:bg-slate-400 disabled:cursor-not-allowed flex items-center justify-center shadow-md hover:shadow-lg"
                   >
                     {loading ? (
                       <div className="inline-block animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent" />
@@ -212,7 +200,7 @@ export default function Contact({ onNavigate }: ContactProps) {
                   </button>
 
                   <p className="text-xs text-slate-500 text-center">
-                    By submitting this form, you agree to our{' '}
+                    By submitting this form, you agree to my{' '}
                     <button
                       type="button"
                       onClick={() => onNavigate('privacy')}
