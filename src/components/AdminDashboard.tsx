@@ -1,16 +1,23 @@
 import { useState, useEffect } from 'react';
 import { Plus, Pencil, Trash2, Check, X } from 'lucide-react';
-import { supabase, Event, Testimonial } from '../lib/supabase';
+import { supabase, Event, Testimonial, Photo } from '../lib/supabase';
 
 export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState<'events' | 'testimonials'>('events');
+  const [activeTab, setActiveTab] = useState<'events' | 'testimonials' | 'photos'>('events');
+
   const [events, setEvents] = useState<Event[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [photos, setPhotos] = useState<Photo[]>([]);
+
   const [loading, setLoading] = useState(true);
+
   const [editingEvent, setEditingEvent] = useState<Event | null>(null);
   const [editingTestimonial, setEditingTestimonial] = useState<Testimonial | null>(null);
+  const [editingPhoto, setEditingPhoto] = useState<Photo | null>(null);
+
   const [showEventForm, setShowEventForm] = useState(false);
   const [showTestimonialForm, setShowTestimonialForm] = useState(false);
+  const [showPhotoForm, setShowPhotoForm] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -19,13 +26,15 @@ export default function AdminDashboard() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [eventsData, testimonialsData] = await Promise.all([
+      const [eventsRes, testimonialsRes, photosRes] = await Promise.all([
         supabase.from('events').select('*').order('date', { ascending: true }),
         supabase.from('testimonials').select('*').order('created_at', { ascending: false }),
+        supabase.from('photos').select('*').order('created_at', { ascending: false }),
       ]);
 
-      if (eventsData.data) setEvents(eventsData.data);
-      if (testimonialsData.data) setTestimonials(testimonialsData.data);
+      if (eventsRes.data) setEvents(eventsRes.data);
+      if (testimonialsRes.data) setTestimonials(testimonialsRes.data);
+      if (photosRes.data) setPhotos(photosRes.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -68,12 +77,34 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleDeletePhoto = async (id: number) => {
+    if (!confirm('Are you sure you want to delete this photo?')) return;
+    try {
+      const { error } = await supabase.from('photos').delete().eq('id', id);
+      if (error) throw error;
+      await fetchData();
+    } catch (error) {
+      console.error('Error deleting photo:', error);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-emerald-600">
         <svg className="h-10 w-10 animate-spin text-emerald-500" viewBox="0 0 24 24">
-          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"/>
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          />
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8v8H4z"
+          />
         </svg>
         <p className="mt-3 text-slate-600">Loading dashboard data...</p>
       </div>
@@ -82,6 +113,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      {/* Tabs */}
       <div className="mb-8 flex space-x-4">
         <button
           onClick={() => setActiveTab('events')}
@@ -103,8 +135,19 @@ export default function AdminDashboard() {
         >
           Testimonials ({testimonials.length})
         </button>
+        <button
+          onClick={() => setActiveTab('photos')}
+          className={`rounded-lg px-6 py-3 font-semibold transition-colors ${
+            activeTab === 'photos'
+              ? 'bg-emerald-600 text-white'
+              : 'bg-white text-slate-700 hover:bg-slate-50 border border-slate-200'
+          }`}
+        >
+          Photos ({photos.length})
+        </button>
       </div>
 
+      {/* Events tab */}
       {activeTab === 'events' && (
         <div>
           <div className="mb-6 flex items-center justify-between">
@@ -138,10 +181,15 @@ export default function AdminDashboard() {
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {events.map((event) => (
-              <div key={event.id} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:shadow-md">
+              <div
+                key={event.id}
+                className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:shadow-md"
+              >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h3 className="mb-2 text-xl font-semibold text-slate-800">{event.title}</h3>
+                    <h3 className="mb-2 text-xl font-semibold text-slate-800">
+                      {event.title}
+                    </h3>
                     <p className="mb-3 text-slate-600">{event.description}</p>
                     <div className="flex flex-wrap gap-3 text-sm text-slate-500">
                       <span>{new Date(event.date).toLocaleDateString()}</span>
@@ -174,6 +222,7 @@ export default function AdminDashboard() {
         </div>
       )}
 
+      {/* Testimonials tab */}
       {activeTab === 'testimonials' && (
         <div>
           <div className="mb-6 flex items-center justify-between">
@@ -207,14 +256,21 @@ export default function AdminDashboard() {
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((t) => (
-              <div key={t.id} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:shadow-md">
+              <div
+                key={t.id}
+                className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:shadow-md"
+              >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="mb-3 flex items-center gap-3">
-                      <span className="text-sm font-semibold text-slate-700">{t.name_or_initials}</span>
+                      <span className="text-sm font-semibold text-slate-700">
+                        {t.name_or_initials}
+                      </span>
                       <span
                         className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ${
-                          t.approved ? 'bg-emerald-100 text-emerald-700' : 'bg-yellow-100 text-yellow-700'
+                          t.approved
+                            ? 'bg-emerald-100 text-emerald-700'
+                            : 'bg-yellow-100 text-yellow-700'
                         }`}
                       >
                         {t.approved ? 'Approved' : 'Pending'}
@@ -226,7 +282,9 @@ export default function AdminDashboard() {
                     <button
                       onClick={() => handleToggleApproval(t.id, t.approved)}
                       className={`rounded-lg p-2 transition-colors ${
-                        t.approved ? 'text-slate-600 hover:bg-slate-50' : 'text-emerald-600 hover:bg-emerald-50'
+                        t.approved
+                          ? 'text-slate-600 hover:bg-slate-50'
+                          : 'text-emerald-600 hover:bg-emerald-50'
                       }`}
                       title={t.approved ? 'Unapprove' : 'Approve'}
                     >
@@ -256,9 +314,95 @@ export default function AdminDashboard() {
           </div>
         </div>
       )}
+
+      {/* Photos tab */}
+      {activeTab === 'photos' && (
+        <div>
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-slate-800">Manage Photos</h2>
+            <button
+              onClick={() => {
+                setEditingPhoto(null);
+                setShowPhotoForm(true);
+              }}
+              className="flex items-center rounded-lg bg-emerald-600 px-4 py-2 text-white transition-colors hover:bg-emerald-700"
+            >
+              <Plus className="mr-2" size={20} />
+              Add Photo
+            </button>
+          </div>
+
+          {showPhotoForm && (
+            <PhotoForm
+              photo={editingPhoto}
+              onClose={() => {
+                setShowPhotoForm(false);
+                setEditingPhoto(null);
+              }}
+              onSave={async () => {
+                await fetchData();
+                setShowPhotoForm(false);
+                setEditingPhoto(null);
+              }}
+            />
+          )}
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {photos.map((p) => (
+              <div
+                key={p.id}
+                className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm transition hover:shadow-md"
+              >
+                <div className="mb-3 aspect-video overflow-hidden rounded-xl bg-slate-100">
+                  {p.image_url ? (
+                    <img
+                      src={p.image_url}
+                      alt={p.caption || 'Photo'}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center text-sm text-slate-400">
+                      No image URL
+                    </div>
+                  )}
+                </div>
+                {p.caption && (
+                  <p className="mb-3 text-sm text-slate-700 line-clamp-2">
+                    {p.caption}
+                  </p>
+                )}
+                <div className="flex items-center justify-between text-xs text-slate-500">
+                  <span className="truncate">{p.image_url}</span>
+                  <div className="ml-2 flex space-x-2">
+                    <button
+                      onClick={() => {
+                        setEditingPhoto(p);
+                        setShowPhotoForm(true);
+                      }}
+                      className="rounded-lg p-1.5 text-blue-600 transition-colors hover:bg-blue-50"
+                      title="Edit"
+                    >
+                      <Pencil size={18} />
+                    </button>
+                    <button
+                      onClick={() => handleDeletePhoto(p.id)}
+                      className="rounded-lg p-1.5 text-red-600 transition-colors hover:bg-red-50"
+                      title="Delete"
+                    >
+                      <Trash2 size={18} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
+/* ---------- EventForm ---------- */
 
 function EventForm({
   event,
@@ -308,20 +452,28 @@ function EventForm({
       </h3>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="mb-2 block text-sm font-semibold text-slate-700">Title</label>
+          <label className="mb-2 block text-sm font-semibold text-slate-700">
+            Title
+          </label>
           <input
             type="text"
             value={formData.title}
-            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
             required
             className="w-full rounded-lg border-2 border-slate-200 px-4 py-2 focus:border-emerald-500 focus:outline-none"
           />
         </div>
         <div>
-          <label className="mb-2 block text-sm font-semibold text-slate-700">Description</label>
+          <label className="mb-2 block text-sm font-semibold text-slate-700">
+            Description
+          </label>
           <textarea
             value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, description: e.target.value })
+            }
             required
             rows={3}
             className="w-full rounded-lg border-2 border-slate-200 px-4 py-2 focus:border-emerald-500 focus:outline-none"
@@ -329,21 +481,29 @@ function EventForm({
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div>
-            <label className="mb-2 block text-sm font-semibold text-slate-700">Date & Time</label>
+            <label className="mb-2 block text-sm font-semibold text-slate-700">
+              Date & Time
+            </label>
             <input
               type="datetime-local"
               value={formData.date}
-              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, date: e.target.value })
+              }
               required
               className="w-full rounded-lg border-2 border-slate-200 px-4 py-2 focus:border-emerald-500 focus:outline-none"
             />
           </div>
           <div>
-            <label className="mb-2 block text-sm font-semibold text-slate-700">Location</label>
+            <label className="mb-2 block text-sm font-semibold text-slate-700">
+              Location
+            </label>
             <input
               type="text"
               value={formData.location}
-              onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, location: e.target.value })
+              }
               required
               className="w-full rounded-lg border-2 border-slate-200 px-4 py-2 focus:border-emerald-500 focus:outline-none"
             />
@@ -356,7 +516,9 @@ function EventForm({
           <input
             type="url"
             value={formData.image_url}
-            onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, image_url: e.target.value })
+            }
             className="w-full rounded-lg border-2 border-slate-200 px-4 py-2 focus:border-emerald-500 focus:outline-none"
           />
         </div>
@@ -381,6 +543,8 @@ function EventForm({
   );
 }
 
+/* ---------- TestimonialForm ---------- */
+
 function TestimonialForm({
   testimonial,
   onClose,
@@ -403,7 +567,10 @@ function TestimonialForm({
 
     try {
       if (testimonial) {
-        const { error } = await supabase.from('testimonials').update(formData).eq('id', testimonial.id);
+        const { error } = await supabase
+          .from('testimonials')
+          .update(formData)
+          .eq('id', testimonial.id);
         if (error) throw error;
       } else {
         const { error } = await supabase.from('testimonials').insert([formData]);
@@ -424,20 +591,28 @@ function TestimonialForm({
       </h3>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="mb-2 block text-sm font-semibold text-slate-700">Name or Initials</label>
+          <label className="mb-2 block text-sm font-semibold text-slate-700">
+            Name or Initials
+          </label>
           <input
             type="text"
             value={formData.name_or_initials}
-            onChange={(e) => setFormData({ ...formData, name_or_initials: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, name_or_initials: e.target.value })
+            }
             required
             className="w-full rounded-lg border-2 border-slate-200 px-4 py-2 focus:border-emerald-500 focus:outline-none"
           />
         </div>
         <div>
-          <label className="mb-2 block text-sm font-semibold text-slate-700">Testimonial</label>
+          <label className="mb-2 block text-sm font-semibold text-slate-700">
+            Testimonial
+          </label>
           <textarea
             value={formData.text}
-            onChange={(e) => setFormData({ ...formData, text: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, text: e.target.value })
+            }
             required
             rows={4}
             className="w-full rounded-lg border-2 border-slate-200 px-4 py-2 focus:border-emerald-500 focus:outline-none"
@@ -448,10 +623,15 @@ function TestimonialForm({
             id="approved"
             type="checkbox"
             checked={formData.approved}
-            onChange={(e) => setFormData({ ...formData, approved: e.target.checked })}
+            onChange={(e) =>
+              setFormData({ ...formData, approved: e.target.checked })
+            }
             className="h-5 w-5 rounded text-emerald-600 focus:ring-emerald-500"
           />
-          <label htmlFor="approved" className="ml-2 text-sm font-semibold text-slate-700">
+          <label
+            htmlFor="approved"
+            className="ml-2 text-sm font-semibold text-slate-700"
+          >
             Approved for display
           </label>
         </div>
@@ -462,6 +642,172 @@ function TestimonialForm({
             className="rounded-lg bg-emerald-600 px-6 py-2 text-white transition-colors hover:bg-emerald-700 disabled:bg-slate-400"
           >
             {saving ? 'Saving...' : 'Save Testimonial'}
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-lg bg-slate-200 px-6 py-2 text-slate-700 transition-colors hover:bg-slate-300"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+/* ---------- PhotoForm (with upload from computer) ---------- */
+
+function PhotoForm({
+  photo,
+  onClose,
+  onSave,
+}: {
+  photo: Photo | null;
+  onClose: () => void;
+  onSave: () => void;
+}) {
+  const [formData, setFormData] = useState({
+    image_url: photo?.image_url || '',
+    caption: photo?.caption || '',
+  });
+
+  const [file, setFile] = useState<File | null>(null);
+  const [saving, setSaving] = useState(false);
+
+  const handleUpload = async () => {
+    if (!file) return null;
+
+    const fileName = `${Date.now()}-${file.name}`;
+    const filePath = fileName;
+
+    const { error: uploadError } = await supabase.storage
+      .from('photos') // bucket name
+      .upload(filePath, file, { upsert: true });
+
+    if (uploadError) {
+      console.error('Upload error:', uploadError);
+      alert('Failed to upload file');
+      return null;
+    }
+
+    const { data } = supabase.storage.from('photos').getPublicUrl(filePath);
+    return data.publicUrl;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSaving(true);
+
+    try {
+      let finalImageUrl = formData.image_url;
+
+      // If user chose a file, upload it and use that URL
+      if (file) {
+        const uploadedUrl = await handleUpload();
+        if (uploadedUrl) {
+          finalImageUrl = uploadedUrl;
+        } else {
+          // upload failed
+          setSaving(false);
+          return;
+        }
+      }
+
+      // If still no URL, stop
+      if (!finalImageUrl) {
+        alert('Please upload an image or provide an image URL.');
+        setSaving(false);
+        return;
+      }
+
+      if (photo) {
+        const { error } = await supabase
+          .from('photos')
+          .update({
+            image_url: finalImageUrl,
+            caption: formData.caption || null,
+          })
+          .eq('id', photo.id);
+        if (error) throw error;
+      } else {
+        const { error } = await supabase.from('photos').insert([
+          {
+            image_url: finalImageUrl,
+            caption: formData.caption || null,
+          },
+        ]);
+        if (error) throw error;
+      }
+
+      onSave();
+    } catch (error) {
+      console.error('Error saving photo:', error);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="mb-6 rounded-2xl border-2 border-slate-200 bg-white p-6">
+      <h3 className="mb-4 text-xl font-bold text-slate-800">
+        {photo ? 'Edit Photo' : 'Add New Photo'}
+      </h3>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Upload from computer */}
+        <div>
+          <label className="mb-2 block text-sm font-semibold text-slate-700">
+            Upload Image From Computer
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const selected = e.target.files?.[0] || null;
+              setFile(selected);
+            }}
+            className="w-full rounded-lg border-2 border-slate-200 px-4 py-2"
+          />
+        </div>
+
+        {/* OR paste an image URL */}
+        <div>
+          <label className="mb-2 block text-sm font-semibold text-slate-700">
+            OR Paste Image URL
+          </label>
+          <input
+            type="url"
+            value={formData.image_url}
+            onChange={(e) =>
+              setFormData({ ...formData, image_url: e.target.value })
+            }
+            placeholder="https://example.com/photo.jpg"
+            className="w-full rounded-lg border-2 border-slate-200 px-4 py-2"
+          />
+        </div>
+
+        <div>
+          <label className="mb-2 block text-sm font-semibold text-slate-700">
+            Caption (optional)
+          </label>
+          <textarea
+            rows={2}
+            value={formData.caption}
+            onChange={(e) =>
+              setFormData({ ...formData, caption: e.target.value })
+            }
+            className="w-full rounded-lg border-2 border-slate-200 px-4 py-2"
+            placeholder="Short description for this photo"
+          />
+        </div>
+
+        <div className="flex space-x-3">
+          <button
+            type="submit"
+            disabled={saving}
+            className="rounded-lg bg-emerald-600 px-6 py-2 text-white transition-colors hover:bg-emerald-700 disabled:bg-slate-400"
+          >
+            {saving ? 'Saving...' : 'Save Photo'}
           </button>
           <button
             type="button"

@@ -11,7 +11,7 @@ import Testimonials from './pages/Testimonials';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import Admin from './pages/Admin';
-
+import Photos from './pages/Photo';
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
@@ -40,6 +40,8 @@ function App() {
         return <Privacy />;
       case 'admin':
         return <Admin />;
+      case 'photo':
+        return <Photos />;
       default:
         return <Home onNavigate={handleNavigate} />;
     }

@@ -17,6 +17,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
     { id: 'events', label: 'Events' },
     { id: 'testimonials', label: 'Testimonials' },
     { id: 'contact', label: 'Contact' },
+    { id: 'photo', label: 'Images'}
   ];
 
   const handleNavClick = (page: string) => {

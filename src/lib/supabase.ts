@@ -41,3 +41,9 @@ export interface Subscriber {
   email: string;
   joined_at?: string;
 }
+export interface Photo {
+  id: number;
+  image_url: string;
+  caption?: string | null;
+  created_at: string;
+}
