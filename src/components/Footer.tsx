@@ -18,14 +18,7 @@ export default function Footer({ onNavigate }: FooterProps) {
 
             <div className="mt-4 flex items-center space-x-4">
               <a
-                href="https://instagram.com/"
-                className="transition-transform hover:scale-105 hover:text-emerald-400"
-                aria-label="Instagram"
-              >
-                <Instagram size={18} />
-              </a>
-              <a
-                href="https://www.linkedin.com/"
+                href="https://www.linkedin.com/in/karabeth-vanick-113a859/"
                 className="transition-transform hover:scale-105 hover:text-emerald-400"
                 aria-label="LinkedIn"
               >
@@ -76,15 +69,11 @@ export default function Footer({ onNavigate }: FooterProps) {
               <div className="flex items-center space-x-3">
                 <Mail size={18} className="text-emerald-400" />
                 <a
-                  href="mailto:karabeth@karabethvanick.com"
+                  href="mailto:karabeth.vanick@gmail.com"
                   className="transition-colors hover:text-emerald-400"
                 >
-                  karabeth@karabethvanick.com
+                  karabeth.vanick@gmail.com
                 </a>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone size={18} className="text-emerald-400" />
-                <span>Available for inquiries</span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin size={18} className="text-emerald-400" />

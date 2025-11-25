@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Send, Mail, Phone, MapPin, CheckCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import emailjs from '@emailjs/browser';
+
 
 interface ContactProps {
   onNavigate: (page: string) => void;
@@ -20,11 +22,30 @@ export default function Contact({ onNavigate }: ContactProps) {
     e.preventDefault();
     setLoading(true);
     setError('');
-
+  
     try {
-      const { error: submitError } = await supabase.from('contacts').insert([formData]);
+      // 1️⃣ Save to Supabase (same as before)
+      const { error: submitError } = await supabase
+        .from('contacts')
+        .insert([formData]);
+  
       if (submitError) throw submitError;
-
+  
+      // 2️⃣ Send email via EmailJS + Gmail
+      const emailResult = await emailjs.send(
+        'service_gxs6ysx',   // 👈 from EmailJS
+        'template_t7vk0jp',  // 👈 from EmailJS
+        {
+          name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        'oubqIZcZoWMBL4dYt'    // 👈 from EmailJS
+      );
+  
+      console.log('EmailJS result:', emailResult.text);
+  
+      // 3️⃣ Success UI
       setSubmitted(true);
       setFormData({ name: '', email: '', message: '' });
       setTimeout(() => setSubmitted(false), 5000);
@@ -35,6 +56,8 @@ export default function Contact({ onNavigate }: ContactProps) {
       setLoading(false);
     }
   };
+  
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -72,8 +95,8 @@ export default function Contact({ onNavigate }: ContactProps) {
                   </div>
                   <div>
                     <h3 className="font-semibold text-slate-800 mb-1">Email</h3>
-                    <a href="mailto:karabeth@karabethvanick.com" className="text-violet-600 hover:text-violet-700">
-                      karabeth@karabethvanick.com
+                    <a href="mailto:karabeth.vanick@gmail.com" className="text-violet-600 hover:text-violet-700">
+                      karabeth.vanick@gmail.com
                     </a>
                   </div>
                 </div>

@@ -104,15 +104,18 @@ export default function About() {
       {/* Ironman Section */}
       <section className="py-16 bg-gradient-to-r from-violet-100 via-indigo-100 to-purple-100">
   <div className="container mx-auto px-4">
-  <div className="max-w-4xl mx-auto text-left leading-relaxed">
-  <h2 className="text-3xl font-bold text-slate-800 mb-4">
+    <div className="max-w-4xl mx-auto text-left leading-relaxed">
+      <h2 className="text-3xl font-bold text-slate-800 mb-4">
         The Road to Ironman World Championships 2026
       </h2>
+
       <p className="text-lg text-slate-600 mb-6">
-        I’m currently training for the <span className="font-semibold text-violet-700">Ironman World Championships</span> in Kona, HI on 
+        I’m currently training for the 
+        <span className="font-semibold text-violet-700"> Ironman World Championships</span> in Kona, HI on 
         <span className="font-medium"> October 10, 2026</span>. This endurance event covers 
         <span className="font-medium"> 140.6 miles</span> of swimming, biking, and running.
       </p>
+
       <p className="text-lg text-slate-600 mb-6">
         Competing in triathlons informs my coaching philosophy and helps me better understand the
         mental and physical challenges my athlete clients experience. Please support me as I raise
@@ -120,15 +123,20 @@ export default function About() {
         <span className="font-semibold text-violet-700"> Ironman Foundation</span> — a non-profit charity that brings
         health and wellness programs to underserved communities with a focus on youth development.
       </p>
+
       <a
-        href="#"
+        href="https://ironmanfoundation.donordrive.com/participants/4255"
+        target="_blank"
+        rel="noopener noreferrer"
         className="inline-block mt-6 px-8 py-3 bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 text-white rounded-lg font-semibold hover:from-indigo-300 hover:via-violet-300 hover:to-purple-300 transition-all duration-300 shadow-md hover:shadow-lg"
       >
         Support My Ironman Journey
       </a>
+
     </div>
   </div>
 </section>
+
 
     </div>
   );
