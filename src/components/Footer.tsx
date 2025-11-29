@@ -54,12 +54,12 @@ export default function Footer({ onNavigate }: FooterProps) {
               >
                 Privacy &amp; Terms
               </button>
-              <button
+              {/* <button
                 onClick={() => onNavigate('admin')}
                 className="block transition-colors hover:text-emerald-400"
               >
                 Admin Login
-              </button>
+              </button> */}
             </div>
           </div>
 
