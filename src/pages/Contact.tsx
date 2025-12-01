@@ -34,7 +34,7 @@ export default function Contact({ onNavigate }: ContactProps) {
       // 2️⃣ Send email via EmailJS + Gmail
       const emailResult = await emailjs.send(
         'service_9l511so',   // 👈 from EmailJS
-        'template_k94sugp',  // 👈 from EmailJS
+        'template_849oumq',  // 👈 from EmailJS
         {
           name: formData.name,
           from_email: formData.email,
