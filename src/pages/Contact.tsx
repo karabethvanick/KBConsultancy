@@ -33,14 +33,14 @@ export default function Contact({ onNavigate }: ContactProps) {
   
       // 2️⃣ Send email via EmailJS + Gmail
       const emailResult = await emailjs.send(
-        'service_gxs6ysx',   // 👈 from EmailJS
-        'template_t7vk0jp',  // 👈 from EmailJS
+        'service_9l511so',   // 👈 from EmailJS
+        'template_k94sugp',  // 👈 from EmailJS
         {
           name: formData.name,
           from_email: formData.email,
           message: formData.message,
         },
-        'oubqIZcZoWMBL4dYt'    // 👈 from EmailJS
+        'trNo06NKSvM6CE0os'    // 👈 from EmailJS
       );
   
       console.log('EmailJS result:', emailResult.text);
