@@ -145,7 +145,7 @@ export default function Privacy() {
                 <h3 className="text-xl font-semibold text-slate-800 mt-6 mb-3">Contact</h3>
                 <p className="text-slate-700 leading-relaxed">
                   If you have questions about these policies or your data, please contact
-                  karabeth.vanick@gmail.com.
+                  kbvcounseling@gmail.com
                 </p>
               </div>
             </div>

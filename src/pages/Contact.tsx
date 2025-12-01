@@ -95,8 +95,8 @@ export default function Contact({ onNavigate }: ContactProps) {
                   </div>
                   <div>
                     <h3 className="font-semibold text-slate-800 mb-1">Email</h3>
-                    <a href="mailto:karabeth.vanick@gmail.com" className="text-violet-600 hover:text-violet-700">
-                      karabeth.vanick@gmail.com
+                    <a href="mailto:kbvcounseling@gmail.com" className="text-violet-600 hover:text-violet-700">
+                      kbvcounseling@gmail.com
                     </a>
                   </div>
                 </div>

@@ -69,10 +69,10 @@ export default function Footer({ onNavigate }: FooterProps) {
               <div className="flex items-center space-x-3">
                 <Mail size={18} className="text-emerald-400" />
                 <a
-                  href="mailto:karabeth.vanick@gmail.com"
+                  href="mailto:kbvcounseling@gmail.com"
                   className="transition-colors hover:text-emerald-400"
                 >
-                  karabeth.vanick@gmail.com
+                  kbvcounseling@gmail.com
                 </a>
               </div>
               <div className="flex items-center space-x-3">
